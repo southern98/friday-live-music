@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Friday Night Live Music – Twin Cities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #111;
+        color: #eee;
+    }
+    header {
+        background: #1e1e1e;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 3px solid #ff9800;
+    }
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+    .subtitle {
+        color: #bbb;
+        margin-top: 5px;
+    }
+    main {
+        padding: 20px;
+        max-width: 1000px;
+        margin: auto;
+    }
+    .venue {
+        background: #1c1c1c;
+        border-left: 6px solid #ff9800;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+    .venue h2 {
+        margin-top: 0;
+        color: #ffcc80;
+    }
+    .band {
+        font-size: 1.1rem;
+        margin: 5px 0;
+    }
+    .time {
+        color: #ccc;
+        font-size: 0.95rem;
+    }
+    footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 0.85rem;
+        color: #888;
+        border-top: 1px solid #333;
+    }
+</style>
+</head>
+
+<body>
+<header>
+    <h1>🎸 Friday Night Live Music</h1>
+    <div class="subtitle">Local bands • Updated daily</div>
+</header>
+
+<main id="content">
+    Loading Friday night schedule…
+</main>
+
+<footer>
+    Powered by PIXTAKR · GitHub Pages
+</footer>
+
+<script>
+/*
+  This data block can later be replaced with:
+  - API calls
+  - Google Sheets JSON
+  - Scraped feeds
+  Refreshed once per page load (daily cache-friendly)
+*/
+
+const fridayData = [
+    {
+        venue: "Coon Rapids VFW",
+        band: "Tailspin",
+        time: "7:00 PM – 11:00 PM"
+    },
+    {
+        venue: "Crystal VFW",
+        band: "Vinyl Revival",
+        time: "7:00 PM – 11:00 PM"
+    },
+    {
+        venue: "Osseo American Legion",
+        band: "The Elements",
+        time: "7:30 PM – 11:30 PM"
+    },
+    {
+        venue: "Fridley American Legion",
+        band: "The Backyard Band",
+        time: "7:00 PM – 11:00 PM"
+    },
+    {
+        venue: "Anoka American Legion",
+        band: "Tailspin",
+        time: "8:00 PM – Midnight"
+    }
+];
+
+function renderSchedule() {
+    const container = document.getElementById("content");
+    container.innerHTML = "";
+
+    fridayData.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "venue";
+        div.innerHTML = `
+            <h2>${item.venue}</h2>
+            <div class="band">${item.band}</div>
+            <div class="time">${item.time}</div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+renderSchedule();
+</script>
+
+</body>
+</html>
