@@ -1,5 +1,8 @@
 name: Scrape Venue Info
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: "0 14 * * *"   # Daily ~9am Central
