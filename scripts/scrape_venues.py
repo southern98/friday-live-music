@@ -1,57 +1,44 @@
 import json
 import re
 import requests
-from bs4 import BeautifulSoup
 from datetime import date
+from pathlib import Path
 
-VENUES = [
-    {
-        "name": "Coon Rapids VFW",
-        "url": "https://www.facebook.com/CoonRapidsVFW",
-        "band": "Tailspin",
-        "bandUrl": "https://www.facebook.com/TailspinBandMN",
-        "time": "7:00 PM – 11:00 PM"
-    },
-    {
-        "name": "Crystal VFW",
-        "url": "https://www.facebook.com/CrystalVFW",
-        "band": "Vinyl Revival",
-        "bandUrl": "https://www.facebook.com/VinylRevivalMN",
-        "time": "7:00 PM – 11:00 PM"
-    }
-]
+DATA_FILE = Path("data/friday.json")
 
 def extract_phone(html):
-    # Generic US phone pattern
     match = re.search(r'\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}', html)
     return match.group(0) if match else "Phone not found"
 
+# Load existing data
+with open(DATA_FILE, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
 events = []
 
-for v in VENUES:
+for event in data.get("events", []):
+    phone = event.get("phone", "Phone not found")
+
     try:
-        r = requests.get(v["url"], timeout=15, headers={
-            "User-Agent": "Mozilla/5.0"
-        })
+        r = requests.get(
+            event["venueUrl"],
+            timeout=15,
+            headers={"User-Agent": "Mozilla/5.0"}
+        )
         phone = extract_phone(r.text)
     except Exception:
-        phone = "Unavailable"
+        pass  # keep existing phone if scrape fails
 
-    events.append({
-        "venue": v["name"],
-        "venueUrl": v["url"],
-        "phone": phone,
-        "band": v["band"],
-        "bandUrl": v["bandUrl"],
-        "time": v["time"]
-    })
+    event["phone"] = phone
+    events.append(event)
 
-data = {
+# Write back updated data
+output = {
     "lastUpdated": str(date.today()),
     "events": events
 }
 
-with open("data/friday.json", "w", encoding="utf-8") as f:
-    json.dump(data, f, indent=2)
+with open(DATA_FILE, "w", encoding="utf-8") as f:
+    json.dump(output, f, indent=2)
 
-print("Updated data/friday.json")
+print(f"Updated {len(events)} venues")
