@@ -41,6 +41,7 @@
     }
     .venue h2 {
         margin-top: 0;
+        margin-bottom: 8px;
         color: #ffcc80;
     }
     .band {
@@ -58,10 +59,17 @@
         color: #888;
         border-top: 1px solid #333;
     }
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 
 <body>
+
 <header>
     <h1>🎸 Friday Night Live Music</h1>
     <div class="subtitle">Local bands • Updated daily</div>
@@ -72,63 +80,53 @@
 </main>
 
 <footer>
-    Powered by PIXTAKR · GitHub Pages
+    Powered by PIXTAKR
 </footer>
 
 <script>
-/*
-  This data block can later be replaced with:
-  - API calls
-  - Google Sheets JSON
-  - Scraped feeds
-  Refreshed once per page load (daily cache-friendly)
-*/
-
-const fridayData = [
-    {
-        venue: "Coon Rapids VFW",
-        band: "Tailspin",
-        time: "7:00 PM – 11:00 PM"
-    },
-    {
-        venue: "Crystal VFW",
-        band: "Vinyl Revival",
-        time: "7:00 PM – 11:00 PM"
-    },
-    {
-        venue: "Osseo American Legion",
-        band: "The Elements",
-        time: "7:30 PM – 11:30 PM"
-    },
-    {
-        venue: "Fridley American Legion",
-        band: "The Backyard Band",
-        time: "7:00 PM – 11:00 PM"
-    },
-    {
-        venue: "Anoka American Legion",
-        band: "Tailspin",
-        time: "8:00 PM – Midnight"
-    }
-];
-
-function renderSchedule() {
+async function loadFridaySchedule() {
     const container = document.getElementById("content");
-    container.innerHTML = "";
+    container.innerHTML = "Loading Friday night schedule…";
 
-    fridayData.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "venue";
-        div.innerHTML = `
-            <h2>${item.venue}</h2>
-            <div class="band">${item.band}</div>
-            <div class="time">${item.time}</div>
-        `;
-        container.appendChild(div);
-    });
+    try {
+        const response = await fetch("./data/friday.json", { cache: "no-store" });
+        const data = await response.json();
+
+        container.innerHTML = "";
+
+        data.events.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "venue";
+            div.innerHTML = `
+                <h2>
+                    <a href="${item.venueUrl}" target="_blank" rel="noopener"
+                       style="color:#ffcc80;">
+                        ${item.venue}
+                    </a>
+                </h2>
+
+                <div class="band">
+                    🎸 <a href="${item.bandUrl}" target="_blank" rel="noopener"
+                         style="color:#ffffff;">
+                        ${item.band}
+                    </a>
+                </div>
+
+                <div class="time">🕒 ${item.time}</div>
+            `;
+            container.appendChild(div);
+        });
+
+        document.querySelector("footer").innerHTML =
+            `Last updated: ${data.lastUpdated} · Powered by PIXTAKR`;
+
+    } catch (error) {
+        container.innerHTML = "⚠️ Unable to load live schedule.";
+        console.error("Schedule load error:", error);
+    }
 }
 
-renderSchedule();
+loadFridaySchedule();
 </script>
 
 </body>
