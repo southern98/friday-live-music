@@ -26,6 +26,8 @@ jobs:
         pip install requests beautifulsoup4
 
     - name: Run scraper
+      env:
+        GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       run: |
         python scripts/scrape_venues.py
 
@@ -34,5 +36,5 @@ jobs:
         git config user.name "venue-bot"
         git config user.email "venue-bot@users.noreply.github.com"
         git add data/friday.json
-        git commit -m "Auto-update venue phone numbers" || echo "No changes"
+        git commit -m "Auto-update venues from Google Maps" || echo "No changes"
         git push
