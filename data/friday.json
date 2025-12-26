@@ -4,37 +4,18 @@
     {
       "venue": "Coon Rapids VFW",
       "venueUrl": "https://www.facebook.com/CoonRapidsVFW",
+      "phone": "Phone not found",
       "band": "Tailspin",
       "bandUrl": "https://www.facebook.com/TailspinBandMN",
-      "time": "7:00 PM – 11:00 PM"
+      "time": "7:00 PM \u2013 11:00 PM"
     },
     {
       "venue": "Crystal VFW",
       "venueUrl": "https://www.facebook.com/CrystalVFW",
+      "phone": "Phone not found",
       "band": "Vinyl Revival",
       "bandUrl": "https://www.facebook.com/VinylRevivalMN",
-      "time": "7:00 PM – 11:00 PM"
-    },
-    {
-      "venue": "Osseo American Legion",
-      "venueUrl": "https://www.facebook.com/OsseoAmericanLegion",
-      "band": "The Elements",
-      "bandUrl": "https://www.facebook.com/TheElementsBandMN",
-      "time": "7:30 PM – 11:30 PM"
-    },
-    {
-      "venue": "Fridley American Legion",
-      "venueUrl": "https://www.facebook.com/FridleyAmericanLegion",
-      "band": "The Backyard Band",
-      "bandUrl": "https://www.facebook.com/TheBackyardBandMN",
-      "time": "7:00 PM – 11:00 PM"
-    },
-    {
-      "venue": "Anoka American Legion",
-      "venueUrl": "https://www.facebook.com/AnokaAmericanLegion",
-      "band": "Tailspin",
-      "bandUrl": "https://www.facebook.com/TailspinBandMN",
-      "time": "8:00 PM – Midnight"
+      "time": "7:00 PM \u2013 11:00 PM"
     }
   ]
 }
