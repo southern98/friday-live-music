@@ -18,6 +18,7 @@
         padding: 20px;
         text-align: center;
         border-bottom: 3px solid #ff9800;
+        position: relative;
     }
     h1 {
         margin: 0;
@@ -26,6 +27,21 @@
     .subtitle {
         color: #bbb;
         margin-top: 5px;
+    }
+    .update-links {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 0.85rem;
+        text-align: right;
+    }
+    .update-links a {
+        color: #ffcc80;
+        text-decoration: none;
+        display: block;
+    }
+    .update-links a:hover {
+        text-decoration: underline;
     }
     main {
         padding: 20px;
@@ -42,7 +58,6 @@
     .venue h2 {
         margin-top: 0;
         margin-bottom: 8px;
-        color: #ffcc80;
     }
     .band {
         font-size: 1.1rem;
@@ -59,18 +74,23 @@
         color: #888;
         border-top: 1px solid #333;
     }
-    a {
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
 </style>
 </head>
 
 <body>
 
 <header>
+    <div class="update-links">
+        📄 <a href="https://raw.githubusercontent.com/southern98/friday-live-music/main/data/friday.json"
+             target="_blank" rel="noopener">
+            View Live Data
+        </a>
+        🧹 <a href="https://github.com/southern98/friday-live-music/issues/new"
+             target="_blank" rel="noopener">
+            Suggest Update
+        </a>
+    </div>
+
     <h1>🎸 Friday Night Live Music</h1>
     <div class="subtitle">Local bands • Updated daily</div>
 </header>
@@ -80,7 +100,7 @@
 </main>
 
 <footer>
-    Powered by PIXTAKR
+    Powered by PIXTAKR · Community verified
 </footer>
 
 <script>
@@ -118,7 +138,7 @@ async function loadFridaySchedule() {
         });
 
         document.querySelector("footer").innerHTML =
-            `Last updated: ${data.lastUpdated} · Powered by PIXTAKR`;
+            `Last updated: ${data.lastUpdated} · Powered by PIXTAKR · Community verified`;
 
     } catch (error) {
         container.innerHTML = "⚠️ Unable to load live schedule.";
