@@ -1,21 +1,4 @@
 {
   "lastUpdated": "2025-12-26",
-  "events": [
-    {
-      "venue": "Coon Rapids VFW",
-      "venueUrl": "https://www.facebook.com/CoonRapidsVFW",
-      "phone": "Phone not found",
-      "band": "Tailspin",
-      "bandUrl": "https://www.facebook.com/TailspinBandMN",
-      "time": "7:00 PM \u2013 11:00 PM"
-    },
-    {
-      "venue": "Crystal VFW",
-      "venueUrl": "https://www.facebook.com/CrystalVFW",
-      "phone": "Phone not found",
-      "band": "Vinyl Revival",
-      "bandUrl": "https://www.facebook.com/VinylRevivalMN",
-      "time": "7:00 PM \u2013 11:00 PM"
-    }
-  ]
+  "events": []
 }
